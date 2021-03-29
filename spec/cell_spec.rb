@@ -23,4 +23,12 @@ describe Cell do
         end 
     end 
 
+    describe '#empty?' do 
+        it 'is empty by default' do 
+            cell = Cell.new("B4") 
+
+            expect(cell.empty?).to eq(true)
+        end 
+    end 
+
 end 
