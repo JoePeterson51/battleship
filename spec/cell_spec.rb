@@ -111,6 +111,15 @@ describe Cell do
 
             expect(cell_1.render).to eq("H")
         end 
+
+        it 'renders show ship space' do 
+            cell_1 = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell_1.place_ship(cruiser)
+           
+
+            expect(cell_1.render(true)).to eq("S")
+        end 
     end 
 
 end 
