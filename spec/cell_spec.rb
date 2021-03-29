@@ -86,6 +86,31 @@ describe Cell do
 
             expect(cell_1.render).to eq(".")
         end 
+
+        it 'render a miss space' do 
+            cell_1 = Cell.new("B4")
+            cell_1.fire_upon
+
+            expect(cell_1.render).to eq("M")
+        end  
+
+        it 'renders sunk space' do 
+            cell_1 = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 1)
+            cell_1.place_ship(cruiser)
+            cell_1.fire_upon
+
+            expect(cell_1.render).to eq("X")
+        end 
+
+        it 'renders hit space' do 
+            cell_1 = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell_1.place_ship(cruiser)
+            cell_1.fire_upon
+
+            expect(cell_1.render).to eq("H")
+        end 
     end 
 
 end 

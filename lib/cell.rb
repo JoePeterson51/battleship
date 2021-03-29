@@ -22,7 +22,9 @@ class Cell
     def fire_upon
         return "already fired here" if fired_upon? == true 
         @fired_upon = true 
-        ship.hit 
+        if empty? == false 
+            ship.hit 
+        end 
     end 
 
     def render
