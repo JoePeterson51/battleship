@@ -76,7 +76,16 @@ describe Cell do
             cell.fire_upon 
 
             expect(cell.ship.health).to eq(2)
+            expect(cell.fire_upon).to eq("already fired here")
         end 
     end     
+
+    describe '#render' do 
+        it 'renders empty space' do 
+            cell_1 = Cell.new("B4")
+
+            expect(cell_1.render).to eq(".")
+        end 
+    end 
 
 end 

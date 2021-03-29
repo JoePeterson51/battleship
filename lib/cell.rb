@@ -24,4 +24,16 @@ class Cell
         @fired_upon = true 
         ship.hit 
     end 
+
+    def render
+        if fired_upon? == false 
+            "."
+        elsif fired_upon? == true && empty? == true 
+            "M"
+        elsif fired_upon? == true && ship.sunk? == true 
+            "X"
+        elsif fired_upon? == true && empty? == false 
+            "H"
+        end 
+    end 
 end 
