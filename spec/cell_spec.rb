@@ -68,6 +68,15 @@ describe Cell do
         
             expect(cell.fired_upon?).to eq(true)
         end 
+
+        it 'removes health' do 
+            cell = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell.place_ship(cruiser)
+            cell.fire_upon 
+
+            expect(cell.ship.health).to eq(2)
+        end 
     end     
 
 end 
