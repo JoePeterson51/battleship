@@ -27,7 +27,7 @@ describe Ship do
       # binding.pry
       expect(cruiser.health).to eq(3)
     end
-  end 
+  end
 
   describe "#sunk?" do
     it 'has not sunk yet' do
@@ -37,8 +37,17 @@ describe Ship do
     end
   end
 
+  describe "#hit" do
+    it 'decreases health when called' do
+        cruiser = Ship.new("Cruiser", 3)
 
-
-
+        expect(cruiser.health).to eq(3)
+        cruiser.hit
+        expect(cruiser.health).to eq(2)
+        cruiser.hit
+        expect(cruiser.health).to eq (1)
+        binding.pry 
+    end
+  end
 
 end

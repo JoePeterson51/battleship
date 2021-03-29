@@ -10,8 +10,12 @@ class Ship
     @sunk = false
   end
 
-  def sunk? 
+  def sunk?
     @sunk
+  end
+
+  def hit
+    @health -= 1 
   end
 
 end
