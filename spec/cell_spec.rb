@@ -39,6 +39,14 @@ describe Cell do
 
             expect(cell.ship).to eq(cruiser)
         end 
+
+         it 'makes cell not empty' do
+            cell = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell.place_ship(cruiser)
+
+            expect(cell.empty?).to eq(false)
+        end 
     end 
 
 
