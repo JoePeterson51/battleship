@@ -45,8 +45,20 @@ describe Ship do
         cruiser.hit
         expect(cruiser.health).to eq(2)
         cruiser.hit
-        expect(cruiser.health).to eq (1)
-        binding.pry 
+        expect(cruiser.health).to eq(1)
+    end
+
+    it 'can sink a ship' do
+        cruiser = Ship.new("Cruiser", 3)
+
+        expect(cruiser.health).to eq(3)
+        cruiser.hit
+        expect(cruiser.health).to eq(2)
+        cruiser.hit
+        expect(cruiser.health).to eq(1)
+        expect(cruiser.sunk?).to eq(false)
+        cruiser.hit
+        expect(cruiser.sunk?).to eq(true)
     end
   end
 
