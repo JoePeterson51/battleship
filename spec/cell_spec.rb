@@ -31,4 +31,15 @@ describe Cell do
         end 
     end 
 
+    describe '#place_ship' do 
+        it 'can place ship' do
+            cell = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell.place_ship(cruiser)
+
+            expect(cell.ship).to eq(cruiser)
+        end 
+    end 
+
+
 end 
