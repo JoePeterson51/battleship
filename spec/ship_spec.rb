@@ -1,4 +1,5 @@
 require './lib/ship'
+require 'pry'
 
 
 describe Ship do
@@ -19,8 +20,19 @@ describe Ship do
       cruiser = Ship.new("Cruiser", 3)
 
       expect(cruiser.length).to eq(3)
-    end 
+    end
 
+    it 'has health equal to length' do
+      cruiser = Ship.new("Cruiser", 3)
+      # binding.pry
+      expect(cruiser.health).to eq(3)
+    end
+    # 
+    # it 'is not sunk yet' do
+    #   cruiser = Ship.new("Cruiser", 3)
+    #
+    #   expect(cruiser.sunk?)
+    # end
   end
 
 
