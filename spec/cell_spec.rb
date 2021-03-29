@@ -59,5 +59,15 @@ describe Cell do
         end 
     end 
 
+    describe '#fire_upon' do 
+        it 'fire upon changes fired_upon to true' do 
+            cell = Cell.new("B4")
+            cruiser = Ship.new("Cruiser", 3)
+            cell.place_ship(cruiser)
+            cell.fire_upon 
+        
+            expect(cell.fired_upon?).to eq(true)
+        end 
+    end     
 
 end 
