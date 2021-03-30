@@ -30,36 +30,37 @@ class Board
   def cell_compare?(cells_array)
     cells_split = cells_array.map do |cell|
       cell.split('')
-    end 
+    end
     first_element = cells_split.map do |array|
-      array[0]
-    end 
-    letter_coordinate = first_element.uniq.length == 1
+      array[0].ord
+    end
+    letter_coordinate_increments = first_element.each_cons(2).all? do |x, y|
+      y == x + 1
+    end
     second_element = cells_split.map do |array|
       array[1].to_i
-    end 
-    number_coordinate = second_element.each_cons(2).all? do |x, y|
+    end
+    number_coordinate_increments = second_element.each_cons(2).all? do |x, y|
       y == x + 1
-    end 
-    return false if letter_coordinate == false 
-    return false if number_coordinate == false 
-    true 
-  end 
+    end
+    if first_element.uniq.count == 1
+      number_coordinate_increments
+    elsif second_element.uniq.count == 1
+      letter_coordinate_increments
+    elsif letter_coordinate_increments == true
+        return false if second_element.uniq.count != 1
+    elsif number_coordinate_increments == true
+        return false if first_element.uniq.count != 1
+    else
+      true
+    end
+  end
 
   def valid_placement?(ship, cells_array)
       return false if cells_array.any? do |coordinate|
         valid_coordinate?(coordinate) == false
-                end
+      end
       return false if cells_array.count != ship.length
       cell_compare?(cells_array)
-      # true
   end
-
-
-
-  #   else
-  #     return true
-  #   end
-  # end
-
 end
