@@ -1,3 +1,4 @@
+
 class Board
 
   attr_reader :cells
@@ -23,7 +24,22 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @cells.keys.include?(coordinate)    
+    @cells.keys.include?(coordinate)
   end
+
+  def valid_placement?(ship, cells_array)
+      return false if cells_array.any? do |coordinate|
+        valid_coordinate?(coordinate) == false
+                end
+
+
+  end
+
+
+
+  #   else
+  #     return true
+  #   end
+  # end
 
 end

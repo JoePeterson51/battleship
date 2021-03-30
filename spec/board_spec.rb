@@ -1,4 +1,5 @@
 require './lib/board'
+require './lib/ship'
 require 'pry'
 
 describe Board do
@@ -35,5 +36,22 @@ describe Board do
       expect(board.valid_coordinate?("A5")).to eq(false)
       expect(board.valid_coordinate?("D5")).to eq(false)
     end
+  end
+
+  describe "#valid_placement?" do
+    it "returns false for invalid inputs" do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+
+      expect(board.valid_placement?(cruiser, ["A5", "A2"])).to eq(false)
+    
+
+    end
+
+    it "returns true for valid" do
+
+    end
+
   end
 end
