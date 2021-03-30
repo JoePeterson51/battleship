@@ -24,7 +24,7 @@ describe Ship do
 
     it 'has health equal to length' do
       cruiser = Ship.new("Cruiser", 3)
-      # binding.pry
+     
       expect(cruiser.health).to eq(3)
     end
   end
