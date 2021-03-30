@@ -56,9 +56,16 @@ describe Board do
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
     end
 
-    it "returns true for valid" do
+#Next make sure coordinates are consecutive 
 
-    end
+
+    # it "returns true for valid" do
+    #   board = Board.new
+    #   cruiser = Ship.new("Cruiser", 3)
+    #   submarine = Ship.new("Submarine", 2)
+    #
+    #   expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq(true)
+    # end
 
   end
 end
