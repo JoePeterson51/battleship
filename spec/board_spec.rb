@@ -56,17 +56,38 @@ describe Board do
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
     end
 
-    it 'must be consecutive' do 
+    it 'number must be consecutive' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
       expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to eq(false)
+    end
+
+    it 'letters must be consecutive' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      expect(board.valid_placement?(cruiser, ["A1", "C1", "D1"])).to eq(false)
+    end
+
+    it 'number must increment' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      expect(board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
+    end
+
+    it 'letters must increment' do
+      board = Board.new
+      submarine = Ship.new("Submarine", 2)
+
+      expect(board.valid_placement?(submarine, ["C1", "B1"])).to eq(false)
     end 
- #### test #cell_compare? more thoroughly
+
 
 
 #Next make sure coordinates are consecutive
-#Learn about branching and make a new branch. 
+#Learn about branching and make a new branch.
 
 
     # it "returns true for valid" do
