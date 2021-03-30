@@ -56,6 +56,15 @@ describe Board do
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
     end
 
+    it 'must be consecutive' do 
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to eq(false)
+    end 
+ #### test #cell_compare? more thoroughly
+
+
 #Next make sure coordinates are consecutive
 #Learn about branching and make a new branch. 
 

@@ -27,12 +27,32 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
+  def cell_compare?(cells_array)
+    cells_split = cells_array.map do |cell|
+      cell.split('')
+    end 
+    first_element = cells_split.map do |array|
+      array[0]
+    end 
+    letter_coordinate = first_element.uniq.length == 1
+    second_element = cells_split.map do |array|
+      array[1].to_i
+    end 
+    number_coordinate = second_element.each_cons(2).all? do |x, y|
+      y == x + 1
+    end 
+    return false if letter_coordinate == false 
+    return false if number_coordinate == false 
+    true 
+  end 
+
   def valid_placement?(ship, cells_array)
       return false if cells_array.any? do |coordinate|
         valid_coordinate?(coordinate) == false
                 end
       return false if cells_array.count != ship.length
-      true
+      cell_compare?(cells_array)
+      # true
   end
 
 
