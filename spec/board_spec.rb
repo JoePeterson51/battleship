@@ -56,7 +56,8 @@ describe Board do
       expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
     end
 
-#Next make sure coordinates are consecutive 
+#Next make sure coordinates are consecutive
+#Learn about branching and make a new branch. 
 
 
     # it "returns true for valid" do
