@@ -31,8 +31,8 @@ class Board
       return false if cells_array.any? do |coordinate|
         valid_coordinate?(coordinate) == false
                 end
-
-
+      return false if cells_array.count != ship.length
+      true
   end
 
 
