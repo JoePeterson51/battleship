@@ -19,5 +19,21 @@ describe Board do
     board = Board.new
 
     expect(board.cells["D4"]).to be_a(Cell)
-  end 
+  end
+
+  describe "#valid_coordinate?" do
+    it "returns true for valid" do
+      board = Board.new
+
+      expect(board.valid_coordinate?("A1")).to eq(true)
+      expect(board.valid_coordinate?("D4")).to eq(true)
+    end
+
+    it "returns false for invalid" do
+      board = Board.new
+
+      expect(board.valid_coordinate?("A5")).to eq(false)
+      expect(board.valid_coordinate?("D5")).to eq(false)
+    end
+  end
 end
