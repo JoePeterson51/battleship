@@ -70,4 +70,14 @@ class Board
       true
     end
   end
+
+  def place(ship, cells_array)
+    return false if valid_placement?(ship, cells_array) == false 
+    placed_cells = cells_array.map do |cell|
+      @cells[cell]
+    end 
+    a = placed_cells.map do |cell|
+      cell.place_ship(ship)
+    end 
+  end 
 end
