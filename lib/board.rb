@@ -43,7 +43,15 @@ class Board
     coordinate.uniq.count == 1
   end 
 
-  def cell_compare?(cells_array)
+  def equal_length(ship, cells_array)
+    cells_array.count == ship.length
+  end 
+
+  def valid_placement?(ship, cells_array)
+    return false if cells_array.any? do |coordinate|
+      valid_coordinate?(coordinate) == false
+    end
+    return false if equal_length(ship, cells_array) == false
     letter_coordinate = cells_split(cells_array).map do |array|
       array[0].ord
     end
@@ -61,13 +69,5 @@ class Board
     else
       true
     end
-  end
-
-  def valid_placement?(ship, cells_array)
-      return false if cells_array.any? do |coordinate|
-        valid_coordinate?(coordinate) == false
-      end
-      return false if cells_array.count != ship.length
-      cell_compare?(cells_array)
   end
 end
