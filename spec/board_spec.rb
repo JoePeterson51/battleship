@@ -13,7 +13,8 @@ describe Board do
     board = Board.new
 
     expect(board.cells).to be_a(Hash)
-
+    expect(board.cells.keys[0]).to be_a(String)
+    expect(board.cells.values[0]).to be_a(Cell)
   end
 
   it 'has another cell' do

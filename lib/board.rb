@@ -27,30 +27,37 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  def cell_compare?(cells_array)
+  def cells_split(cells_array)
     cells_split = cells_array.map do |cell|
       cell.split('')
     end
-    first_element = cells_split.map do |array|
+  end 
+
+  def increment?(coordinate)
+    coordinate.each_cons(2).all? do |x, y|
+      y == x + 1
+    end
+  end 
+
+  def one_element?(coordinate)
+    coordinate.uniq.count == 1
+  end 
+
+  def cell_compare?(cells_array)
+    letter_coordinate = cells_split(cells_array).map do |array|
       array[0].ord
     end
-    letter_coordinate_increments = first_element.each_cons(2).all? do |x, y|
-      y == x + 1
-    end
-    second_element = cells_split.map do |array|
+    number_coordinate = cells_split(cells_array).map do |array|
       array[1].to_i
     end
-    number_coordinate_increments = second_element.each_cons(2).all? do |x, y|
-      y == x + 1
-    end
-    if first_element.uniq.count == 1
-      number_coordinate_increments
-    elsif second_element.uniq.count == 1
-      letter_coordinate_increments
-    elsif letter_coordinate_increments == true
-        return false if second_element.uniq.count != 1
-    elsif number_coordinate_increments == true
-        return false if first_element.uniq.count != 1
+    if one_element?(letter_coordinate)
+      increment?(number_coordinate)
+    elsif one_element?(number_coordinate)
+      increment?(letter_coordinate)
+    elsif increment?(letter_coordinate) == true
+        return false if one_element?(number_coordinate) == false
+    elsif increment?(number_coordinate) == true
+        return false if one_element?(letter_coordinate) == false
     else
       true
     end
