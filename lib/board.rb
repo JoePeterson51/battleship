@@ -31,21 +31,21 @@ class Board
     cells_split = cells_array.map do |cell|
       cell.split('')
     end
-  end 
+  end
 
   def increment?(coordinate)
     coordinate.each_cons(2).all? do |x, y|
       y == x + 1
     end
-  end 
+  end
 
   def one_element?(coordinate)
     coordinate.uniq.count == 1
-  end 
+  end
 
   def equal_length(ship, cells_array)
     cells_array.count == ship.length
-  end 
+  end
 
   def valid_placement?(ship, cells_array)
     return false if cells_array.any? do |coordinate|
@@ -60,10 +60,10 @@ class Board
     end
     placed_cells = cells_array.map do |cell|
       @cells[cell]
-    end 
+    end
     return false if placed_cells.any? do |cell|
-      cell.empty? == false 
-    end 
+      cell.empty? == false
+    end
     if one_element?(letter_coordinate)
       increment?(number_coordinate)
     elsif one_element?(number_coordinate)
@@ -78,12 +78,29 @@ class Board
   end
 
   def place(ship, cells_array)
-    return false if valid_placement?(ship, cells_array) == false 
+    return false if valid_placement?(ship, cells_array) == false
     placed_cells = cells_array.map do |cell|
       @cells[cell]
-    end 
+    end
     placed_cells.map do |cell|
       cell.place_ship(ship)
-    end 
-  end 
+    end
+  end
+
+  def render
+    format_render
+  end
+
+  def format_render
+    rendered = @cells.map do |location, cell |
+        cell.render
+    end
+    rendered << "\n"
+    rendered.insert(12, "\nD")
+    rendered.insert(8, "\nC")
+    rendered.insert(4, "\nB")
+    rendered.unshift("1 2 3 4 \nA")
+    rendered.join(" ")
+  end
+
 end
