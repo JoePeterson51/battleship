@@ -23,6 +23,9 @@ class Board
           }
   end
 
+  # def cell_creator
+
+
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
   end
@@ -68,12 +71,10 @@ class Board
       increment?(number_coordinate)
     elsif one_element?(number_coordinate)
       increment?(letter_coordinate)
-    elsif increment?(letter_coordinate) == true
-        return false if one_element?(number_coordinate) == false
-    elsif increment?(number_coordinate) == true
-        return false if one_element?(letter_coordinate) == false
-    else
-      true
+    elsif increment?(letter_coordinate)
+       one_element?(number_coordinate)
+    elsif increment?(number_coordinate)
+      one_element?(letter_coordinate)
     end
   end
 

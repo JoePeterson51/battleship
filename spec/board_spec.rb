@@ -133,7 +133,7 @@ describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       board.render
 
-
+      # binding.pry 
       expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
