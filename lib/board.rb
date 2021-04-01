@@ -58,6 +58,12 @@ class Board
     number_coordinate = cells_split(cells_array).map do |array|
       array[1].to_i
     end
+    placed_cells = cells_array.map do |cell|
+      @cells[cell]
+    end 
+    return false if placed_cells.any? do |cell|
+      cell.empty? == false 
+    end 
     if one_element?(letter_coordinate)
       increment?(number_coordinate)
     elsif one_element?(number_coordinate)
@@ -76,7 +82,7 @@ class Board
     placed_cells = cells_array.map do |cell|
       @cells[cell]
     end 
-    a = placed_cells.map do |cell|
+    placed_cells.map do |cell|
       cell.place_ship(ship)
     end 
   end 
