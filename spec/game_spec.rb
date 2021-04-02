@@ -21,8 +21,8 @@ describe Game do
     it 'can place ships' do 
       game = Game.new 
       game.computer_place
-      puts game.computer_board.render(true)
-      # expect(game.computer_board.render(true).include?("S")).to eq(true)
+
+      expect(game.computer_board.render(true).include?("S")).to eq(true)
     end 
   end  
 end 

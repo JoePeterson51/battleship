@@ -18,16 +18,18 @@ class Game
     end 
   end 
  
+
   
 
   def computer_place
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     computer_board.cell_creator
-    cells_arr = @computer_board.cells.keys.sample(3)
-    until @computer_board.valid_placement?(cruiser, cells_array) == true 
-      @computer_board.place(cruiser, cells_array) 
-    end 
-    require 'pry'; binding.pry
+    cruiser_cells = @computer_board.cells.keys.combination(3).to_a.shuffle
+    submarine_cells = 
+    valid_cruiser = cruiser_cells.find do |array|
+      @computer_board.valid_placement?(cruiser, array)
+    end  
+    @computer_board.place(cruiser, valid_cruiser)
   end 
 end 
