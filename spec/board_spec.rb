@@ -20,6 +20,7 @@ describe Board do
   it 'has another cell' do
     board = Board.new
 
+
     expect(board.cells["D4"]).to be_a(Cell)
   end
 
@@ -133,7 +134,7 @@ describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       board.render
 
-
+      binding.pry
       expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end

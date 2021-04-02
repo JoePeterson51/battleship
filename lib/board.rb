@@ -3,25 +3,25 @@ class Board
 
   attr_reader :cells
   def initialize
-    @cells = {
-      "A1" => Cell.new("A1"),
-      "A2" => Cell.new("A2"),
-      "A3" => Cell.new("A3"),
-      "A4" => Cell.new("A4"),
-      "B1" => Cell.new("B1"),
-      "B2" => Cell.new("B2"),
-      "B3" => Cell.new("B3"),
-      "B4" => Cell.new("B4"),
-      "C1" => Cell.new("C1"),
-      "C2" => Cell.new("C2"),
-      "C3" => Cell.new("C3"),
-      "C4" => Cell.new("C4"),
-      "D1" => Cell.new("D1"),
-      "D2" => Cell.new("D2"),
-      "D3" => Cell.new("D3"),
-      "D4" => Cell.new("D4")
-          }
+    @cells = cell_creator
   end
+
+  def cell_creator
+    letters = ["A", "B", "C", "D"]
+    numbers = ["1", "2", "3", "4"]
+    cells = {}
+    coordinates = letters.map do |letter|
+    letter = numbers.map do |coordinate|
+          letter + coordinate
+      end
+    end.flatten
+    coordinates.map do |coordinate|
+     cells[coordinate] = Cell.new(coordinate)
+    end
+    cells
+
+  end
+
 
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
@@ -68,12 +68,10 @@ class Board
       increment?(number_coordinate)
     elsif one_element?(number_coordinate)
       increment?(letter_coordinate)
-    elsif increment?(letter_coordinate) == true
-        return false if one_element?(number_coordinate) == false
-    elsif increment?(number_coordinate) == true
-        return false if one_element?(letter_coordinate) == false
-    else
-      true
+    elsif increment?(letter_coordinate)
+       one_element?(number_coordinate)
+    elsif increment?(number_coordinate)
+      one_element?(letter_coordinate)
     end
   end
 
@@ -87,13 +85,13 @@ class Board
     end
   end
 
-  def render
-    format_render
+  def render(show_ships = nil)
+    format_render(show_ships)
   end
 
-  def format_render
+  def format_render(show_ships = nil)
     rendered = @cells.map do |location, cell |
-        cell.render
+        cell.render(show_ships)
     end
     rendered << "\n"
     rendered.insert(12, "\nD")
