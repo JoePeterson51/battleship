@@ -28,12 +28,12 @@ describe Game do
     it 'will place both ships' do 
       game = Game.new 
       game.computer_place
-      s = game.computer_board.render(true)
-      a = s.split
-      b = a.select do |string|
+      board = game.computer_board.render(true)
+      split_board = board.split
+      board_select = split_board.select do |string|
         string == "S"
       end 
-      expect(b.count).to eq(5)
+      expect(board_select.count).to eq(5)
     end 
   end  
 end 
