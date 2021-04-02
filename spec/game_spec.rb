@@ -39,7 +39,7 @@ describe Game do
     end
   end
 
-  describe "#user_place" do
+  describe "#cruiser_place" do
     it "allows user to place ships" do
       game = Game.new
 
@@ -48,7 +48,7 @@ describe Game do
 
 
     end
-  end 
+  end
 
 
 end
