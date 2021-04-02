@@ -27,10 +27,10 @@ class Game
     valid_cruiser = cruiser_cells.find do |array|
       @computer_board.valid_placement?(cruiser, array)
     end
+    @computer_board.place(cruiser, valid_cruiser)
     valid_submarine = submarine_cells.find do |array|
       @computer_board.valid_placement?(submarine, array)
     end
-    @computer_board.place(cruiser, valid_cruiser)
     @computer_board.place(submarine, valid_submarine)
   end
 

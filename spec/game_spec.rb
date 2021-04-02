@@ -35,20 +35,6 @@ describe Game do
       end
 
       expect(board_select.count).to eq(5)
-
     end
   end
-
-  describe "#cruiser_place" do
-    it "allows user to place ships" do
-      game = Game.new
-
-      game.computer_place
-      game.user_place
-
-
-    end
-  end
-
-
 end

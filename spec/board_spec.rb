@@ -134,7 +134,7 @@ describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       board.render
 
-      expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
     it 'renders board with ship' do 
@@ -142,7 +142,7 @@ describe Board do
       cruiser = Ship.new("Cruiser", 3)
       board.place(cruiser, ["A1", "A2", "A3"])
       
-      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end 
 
     it 'can fire on board' do 
@@ -151,7 +151,7 @@ describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       board.fire("B1")
 
-      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n")
+      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n")
     end 
 
     it 'can be sunk' do 
@@ -161,10 +161,10 @@ describe Board do
       board.fire("A1")
       board.fire("A2")
 
-      expect(board.render).to eq("1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
 
       board.fire("A3")
-      expect(board.render).to eq("1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
     end 
   end
 
