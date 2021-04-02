@@ -18,9 +18,6 @@ class Game
     end
   end
 
-
-
-
   def computer_place
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -37,16 +34,21 @@ class Game
     @computer_board.place(submarine, valid_submarine)
   end
 
-  def user_place
-    cruiser = Ship.new("Cruiser", 3)
+  def cruiser_place_greeting
     puts "I have placed my ships!"
     puts "Now it's your turn, punk."
     puts "This is YOUR BOARD!"
-    puts player_board.render
+  end
+
+  def cruiser_coordinate_prompt
     puts "You have a cruiser. It cruises. Place it. It is 3 units long."
     puts "Enter the squares for the Cruiser. They should be three in a row/column."
     puts "NO DIAGONALS!"
     puts "Enter the first coordinate ->"
+  end
+
+  def cruiser_place
+    cruiser = Ship.new("Cruiser", 3)
     first_coordinate = gets.chomp.upcase!
     puts "Now enter the second coordinate ->"
     second_coordinate = gets.chomp.upcase!
@@ -61,14 +63,24 @@ class Game
         puts player_board.render(true)
         puts "There it is! Your cruuuuuiser."
       end
+  end
+
+  def user_place
+    cruiser_place_greeting
+    puts player_board.render
+    cruiser_coordinate_prompt
+    cruiser_place
     user_submarine_place
   end
 
-  def user_submarine_place
-    submarine = Ship.new("Submarine", 2)
+  def submarine_greeting
     puts "Now place your submarine. Don't place it on your cruiser."
     puts "It is 2 units long."
     puts "Enter your first_coordinate ->"
+  end
+
+  def submarine_place
+    submarine = Ship.new("Submarine", 2)
     submarine_first_coordinate = gets.chomp.upcase!
     puts "And now the next coordinate. ->"
     submarine_second_coordinate = gets.chomp.upcase!
@@ -81,7 +93,11 @@ class Game
         puts player_board.render(true)
         puts "There it is! Your sub."
       end
-    end
+  end
 
+  def user_submarine_place
+    submarine_greeting
+    submarine_place
+  end
 
 end
