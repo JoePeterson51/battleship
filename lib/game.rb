@@ -73,11 +73,14 @@ class Game
     user_submarine_place
   end
 
-  def user_submarine_place
-    submarine = Ship.new("Submarine", 2)
+  def submarine_greeting
     puts "Now place your submarine. Don't place it on your cruiser."
     puts "It is 2 units long."
     puts "Enter your first_coordinate ->"
+  end
+
+  def submarine_place
+    submarine = Ship.new("Submarine", 2)
     submarine_first_coordinate = gets.chomp.upcase!
     puts "And now the next coordinate. ->"
     submarine_second_coordinate = gets.chomp.upcase!
@@ -90,7 +93,11 @@ class Game
         puts player_board.render(true)
         puts "There it is! Your sub."
       end
-    end
+  end
 
+  def user_submarine_place
+    submarine_greeting
+    submarine_place
+  end
 
 end

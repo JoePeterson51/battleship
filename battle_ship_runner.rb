@@ -9,3 +9,6 @@ game = Game.new
 
 game.computer_place
 game.user_place
+
+puts game.computer_board.render
+puts game.player_board.render
