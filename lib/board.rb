@@ -100,4 +100,8 @@ class Board
     rendered.join(" ")
   end
 
+  def fire(cell)
+    @cells[cell].fire_upon
+  end 
+
 end
