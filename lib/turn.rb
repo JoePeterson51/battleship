@@ -19,7 +19,7 @@ class Turn
   def player_shot
     prompt_shot
     shot = gets.chomp.upcase!
-    if game.computer_board.valid_coordinate?(shot) && game.computer_board.cells[shot].fired_upon? == false 
+    if game.computer_board.valid_coordinate?(shot) && game.computer_board.cells[shot].fired_upon? == false
       game.computer_board.fire(shot)
     else
       puts "Invalid coordinate. Try again."
@@ -42,11 +42,11 @@ class Turn
 
   def has_lost?
     if game.player_board.render(true).include?("S") == false
-       puts "You have lost."
+      true
     elsif game.computer_board.render(true).include?("S") == false
-       puts "You have WON!"
+      true
     end
-    false
+      false
   end
 
 

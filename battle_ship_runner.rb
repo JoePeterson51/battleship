@@ -12,7 +12,10 @@ game.computer_place
 game.user_place
 
 turn.turn_start
-while turn.has_lost? == false
+
+loop do
 turn.player_shot
 turn.computer_shot
-end 
+
+break if turn.has_lost? == true 
+end
