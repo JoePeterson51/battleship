@@ -6,9 +6,10 @@ require './lib/cell'
 
 
 game = Game.new
+turn = Turn.new(game)
 
 game.computer_place
 game.user_place
 
-puts game.computer_board.render
-puts game.player_board.render
+turn.turn_start
+turn.player_shot

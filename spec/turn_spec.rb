@@ -14,7 +14,7 @@ describe Turn do
   it 'has a game' do 
     game = Game.new 
     turn = Turn.new(game)
-require 'pry'; binding.pry
+
     expect(turn.game).to be_a(Game)
   end 
 end 
