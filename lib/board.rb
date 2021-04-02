@@ -96,12 +96,12 @@ class Board
     rendered.insert(12, "\nD")
     rendered.insert(8, "\nC")
     rendered.insert(4, "\nB")
-    rendered.unshift("1 2 3 4 \nA")
+    rendered.unshift("  1 2 3 4 \nA")
     rendered.join(" ")
   end
 
   def fire(cell)
     @cells[cell].fire_upon
-  end 
+  end
 
 end
