@@ -16,6 +16,7 @@ Team strengths & collaboration styles (consider discussing your Pairin qualities
 
 How we can use our strengths to overcome obstacles:
   We'll patiently collaborate with creativity to solve problems.
+  We'll collaborate on searching for answers in ruby docs and other resources.
 
 
 Schedule Expectations (When are we available to work together and individually? What constraints do we have? Make sure to discuss the remote questions above in regards to this section):

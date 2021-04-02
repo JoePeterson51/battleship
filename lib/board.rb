@@ -85,13 +85,13 @@ class Board
     end
   end
 
-  def render
-    format_render
+  def render(show_ships = nil)
+    format_render(show_ships)
   end
 
-  def format_render
+  def format_render(show_ships = nil)
     rendered = @cells.map do |location, cell |
-        cell.render
+        cell.render(show_ships)
     end
     rendered << "\n"
     rendered.insert(12, "\nD")
