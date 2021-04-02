@@ -13,9 +13,17 @@ describe Game do
   it 'has boards' do 
     game = Game.new 
 
-    expect(game.board_1).to be_a(Board)
-    expect(game.board_2).to be_a(Board)
+    expect(game.computer_board).to be_a(Board)
+    expect(game.player_board).to be_a(Board)
   end 
 
+  describe '#computer_place' do 
+    it 'can place ships' do 
+      game = Game.new 
+      game.computer_place
+      puts game.computer_board.render(true)
+      # expect(game.computer_board.render(true).include?("S")).to eq(true)
+    end 
+  end  
 end 
 
