@@ -134,9 +134,16 @@ describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
       board.render
 
-      binding.pry
       expect(board.render).to eq("1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
+
+    it 'renders board with ship' do 
+            board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      board.place(cruiser, ["A1", "A2", "A3"])
+      
+      expect(board.render(true)).to eq("1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end 
   end
 
 end
