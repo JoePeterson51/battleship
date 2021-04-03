@@ -7,10 +7,8 @@ class Turn
 
 
   def turn_start
-    puts "==========COMPUTER BOARD=========="
-    puts game.computer_board.render
-    puts "==========PLAYER BOARD=========="
-    puts game.player_board.render(true)
+   show_computer_board
+   show_player_board
   end
 
   def prompt_shot
@@ -26,7 +24,7 @@ class Turn
       puts "Invalid coordinate. Try again."
       player_shot
     end
-    puts game.computer_board.render
+    show_computer_board
   end
 
   def computer_shot
@@ -37,8 +35,9 @@ class Turn
     unfired.shuffle!
     shot = unfired.shift.coordinate
     game.player_board.fire(shot)
-    puts "I shoot at #{shot}!"
-    puts game.player_board.render(true)
+    puts "COMPUTER----'I shoot at #{shot}!'"
+    puts "\n"
+    show_player_board
   end
 
   def game_over?
@@ -51,4 +50,14 @@ class Turn
     end
       @game_over
   end
+
+  def show_computer_board
+    puts "==========COMPUTER BOARD=========="
+    puts game.computer_board.render 
+  end 
+
+  def show_player_board
+    puts "==========PLAYER BOARD=========="
+    puts game.player_board.render(true)
+  end 
 end
