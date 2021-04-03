@@ -1,8 +1,9 @@
 class Game
-  attr_reader :computer_board, :player_board
+  attr_reader :computer_board, :player_board, :game_over
   def initialize
     @computer_board = Board.new
     @player_board = Board.new
+    @game_over = false 
   end
 
   def welcome
@@ -16,6 +17,29 @@ class Game
     else
       puts "Invalid input"
     end
+  end
+
+  def start 
+    computer_place
+    user_place
+    
+    loop do
+      player_shot
+      if game_over?
+        puts "game over"
+        puts "\n"
+        welcome
+      break
+      end 
+
+    computer_shot
+      if game_over?
+        puts "game over"
+        puts "\n"
+        welcome
+      break
+      end 
+    end 
   end
 
   def computer_place
@@ -100,4 +124,53 @@ class Game
     submarine_place
   end
 
+  def prompt_shot
+    puts "Enter your coordinate for your shot!!"
+  end
+
+  def show_computer_board
+    puts "==========COMPUTER BOARD=========="
+    puts computer_board.render 
+  end 
+
+  def show_player_board
+    puts "==========PLAYER BOARD=========="
+    puts player_board.render(true)
+  end 
+
+  def game_over?
+    if @player_board.render(true).include?("S") == false
+      puts "Computer has won"
+      @game_over = true 
+    elsif @computer_board.render(true).include?("S") == false 
+      puts "You have won!!!"
+      @game_over = true
+    end
+      @game_over
+  end
+
+  def player_shot
+    prompt_shot
+    shot = gets.chomp.upcase!
+    if computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon? == false
+      computer_board.fire(shot)
+    else
+      puts "Invalid coordinate. Try again."
+      player_shot
+    end
+    show_computer_board
+  end
+
+  def computer_shot
+    possible_cells = player_board.cells.values
+    unfired = possible_cells.select do |cell|
+      cell.fired_upon? == false
+    end
+    unfired.shuffle!
+    shot = unfired.shift.coordinate
+    player_board.fire(shot)
+    puts "COMPUTER----'I shoot at #{shot}!'"
+    puts "\n"
+    show_player_board
+  end
 end
