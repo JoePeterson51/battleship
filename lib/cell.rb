@@ -20,7 +20,7 @@ class Cell
     end
 
     def fire_upon
-        return "already fired here" if fired_upon? == true
+        return "already fired here" if fired_upon?
         @fired_upon = true
         if empty? == false
             ship.hit
@@ -46,7 +46,7 @@ class Cell
     end
 
     def miss?
-      fired_upon? && empty? 
+      fired_upon? && empty?
     end
 
     def hit?
@@ -61,13 +61,5 @@ class Cell
       fired_upon? && ship.sunk?
     end
 
-    def shot_evaluate
-      # if sunk?
-      #   puts "You sunk the ship!"
-      # elsif hit?
-      #   puts "You hit a ship!"
-      # elsif miss?
-      #   puts "You missed!"
-      # end
-    end
+
 end

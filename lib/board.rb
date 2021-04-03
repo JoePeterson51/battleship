@@ -103,8 +103,24 @@ class Board
   def fire(cell)
     fired_cell = @cells[cell]
     fired_cell.fire_upon
+    shot_evaluate(fired_cell)
+
     # fired_cell.shot_evaluate
 
+  end
+
+  def shot_evaluate(cell)
+
+    if cell.miss?
+      p "You missed!"
+      puts "\n"
+    elsif cell.sunk?
+      p "You sunk the ship!"
+      puts "\n"
+    elsif cell.hit?
+      p "You hit a ship!"
+      puts "\n"
+    end
   end
 
 
