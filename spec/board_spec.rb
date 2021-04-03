@@ -168,16 +168,6 @@ describe Board do
     end
   end
 
-  # describe "#shot_evaluate" do
-  #   it 'registers a hit' do
-  #   board = Board.new
-  #   cruiser = Ship.new("Cruiser", 3)
-  #   board.place(cruiser, ["A1", "A2", "A3"])
-  #   board.fire("A1")
-  #
-  #   binding.pry
-  #   expect(board.fire("A1")).to eq("You hit a ship!")
-  #   end
-  # end
+  
 
 end

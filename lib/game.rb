@@ -161,11 +161,6 @@ class Game
     show_computer_board
   end
 
-  # def player_shot_feedback
-  #   if
-  #
-  # end
-
   def computer_shot
     possible_cells = player_board.cells.values
     unfired = possible_cells.select do |cell|
@@ -177,5 +172,6 @@ class Game
     puts "COMPUTER----'I shoot at #{shot}!'"
     puts "\n"
     show_player_board
+    # Add shot evaluation for computer shot. Add shot location for player shot 
   end
 end
