@@ -1,7 +1,7 @@
 require './lib/board'
 require './lib/ship'
 require './lib/game'
-require './lib/turn'
+
 
 describe Game do
   it 'exists' do

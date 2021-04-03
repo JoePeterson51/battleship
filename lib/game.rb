@@ -3,7 +3,7 @@ class Game
   def initialize
     @computer_board = Board.new
     @player_board = Board.new
-    @game_over = false 
+    @game_over = false
   end
 
   def welcome
@@ -19,10 +19,10 @@ class Game
     end
   end
 
-  def start 
+  def start
     computer_place
     user_place
-    
+
     loop do
       player_shot
       if game_over?
@@ -30,7 +30,7 @@ class Game
         puts "\n"
         welcome
       break
-      end 
+      end
 
     computer_shot
       if game_over?
@@ -38,8 +38,8 @@ class Game
         puts "\n"
         welcome
       break
-      end 
-    end 
+      end
+    end
   end
 
   def computer_place
@@ -130,19 +130,19 @@ class Game
 
   def show_computer_board
     puts "==========COMPUTER BOARD=========="
-    puts computer_board.render 
-  end 
+    puts computer_board.render
+  end
 
   def show_player_board
     puts "==========PLAYER BOARD=========="
     puts player_board.render(true)
-  end 
+  end
 
   def game_over?
     if @player_board.render(true).include?("S") == false
       puts "Computer has won"
-      @game_over = true 
-    elsif @computer_board.render(true).include?("S") == false 
+      @game_over = true
+    elsif @computer_board.render(true).include?("S") == false
       puts "You have won!!!"
       @game_over = true
     end
@@ -172,5 +172,6 @@ class Game
     puts "COMPUTER----'I shoot at #{shot}!'"
     puts "\n"
     show_player_board
+    # Add shot evaluation for computer shot. Add shot location for player shot 
   end
 end
