@@ -1,7 +1,8 @@
 class Turn
-  attr_reader :game
+  attr_reader :game, :game_over
   def initialize(game)
     @game = game
+    @game_over = false 
   end
 
 
@@ -40,14 +41,14 @@ class Turn
     puts game.player_board.render(true)
   end
 
-  def has_lost?
+  def game_over?
     if game.player_board.render(true).include?("S") == false
-      true
-    elsif game.computer_board.render(true).include?("S") == false
-      true
+      puts "Computer has won"
+      @game_over = true 
+    elsif game.computer_board.render(true).include?("S") == false 
+      puts "You have won!!!"
+      @game_over = true
     end
-      false
+      @game_over
   end
-
-
 end

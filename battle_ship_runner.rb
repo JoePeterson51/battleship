@@ -14,8 +14,11 @@ game.user_place
 turn.turn_start
 
 loop do
-turn.player_shot
-turn.computer_shot
+  turn.player_shot
+  turn.computer_shot
 
-break if turn.has_lost? == true 
+if turn.game_over?
+  puts "Game over"
+  break
+end 
 end

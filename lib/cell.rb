@@ -28,12 +28,12 @@ class Cell
     end
 
     def render(show_ships = nil)
-      if show_ships == true && empty? == false && sunk? == false
-        "S"
-      elsif show_ships == true && empty? == false && sunk?
+      if show_ships == true && (empty? == false && sunk?)
         "X"
-      elsif show_ships == true && empty? == false && hit?
+      elsif show_ships == true && (empty? == false && hit?) 
         "H"
+      elsif show_ships == true && (empty? == false && sunk? == false)
+        "S"
       elsif blank?
         "."
       elsif miss?
@@ -61,7 +61,4 @@ class Cell
     def sunk?
       fired_upon? == true && ship.sunk? == true
     end
-
-
-
 end
