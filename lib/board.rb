@@ -101,7 +101,11 @@ class Board
   end
 
   def fire(cell)
-    @cells[cell].fire_upon
+    fired_cell = @cells[cell]
+    fired_cell.fire_upon
+    # fired_cell.shot_evaluate
+
   end
+
 
 end
