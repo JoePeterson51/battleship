@@ -1,15 +1,18 @@
 
 class Board
 
-  attr_reader :cells, :board_length
+  attr_reader :cells, :board_length, :potential_letters
   def initialize (board_length)
+    @board_length = board_length.to_i
+    @potential_letters = ('A'..'Z').to_a
     @cells = cell_creator
-    @board_length = board_length
   end
 
   def cell_creator
-    letters = ["A", "B", "C", "D"]
-    numbers = ["1", "2", "3", "4"]
+    letters = @potential_letters[0..(@board_length - 1)]
+    numbers = letters.map do |letter|
+       (letters.index(letter) + 1).to_s
+    end
     cells = {}
     coordinates = letters.map do |letter|
     letter = numbers.map do |coordinate|
@@ -90,14 +93,29 @@ class Board
   end
 
   def format_render(show_ships = nil)
+    total_cells = @board_length * @board_length
     rendered = @cells.map do |location, cell |
         cell.render(show_ships)
     end
+   letters = @potential_letters[0..(@board_length - 1)]
+      # require 'pry'; binding.pry
+    length = @board_length
     rendered << "\n"
-    rendered.insert(12, "\nD")
-    rendered.insert(8, "\nC")
-    rendered.insert(4, "\nB")
-    rendered.unshift("  1 2 3 4 \nA")
+    length.times do
+      rendered.insert(-@board_length, "\n#{letters.first}")
+      @board_length + @board_length
+      letters.shift
+    end
+    header_numbers = Array.new(@board_length,)
+    require "pry"; binding.pry
+
+
+
+    # rendered.insert()
+    # rendered.insert(-@board_length, "\nD")
+    # rendered.insert(, "\nC")
+    # rendered.insert(4, "\nB")
+    # rendered.unshift("  1 2 3 4 \nA")
     rendered.join(" ")
   end
 

@@ -29,8 +29,8 @@ class Game
   end
 
   def start
-    puts "How big should the board be? Enter a number."
-    board_length = gets.chomp.to_i
+    puts "How big should the board be? Enter a number between 1-26."
+    board_length = gets.chomp
     @player_board = Board.new(board_length)
     @computer_board = Board.new(board_length)
     computer_place
