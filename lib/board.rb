@@ -110,18 +110,15 @@ class Board
   end
 
   def shot_evaluate(cell)
-
     if cell.miss?
-      p "You missed!"
-      puts "\n"
+      puts 
+      p "#{cell.coordinate} missed!"
     elsif cell.sunk?
-      p "You sunk the ship!"
-      puts "\n"
+      puts
+      p "#{cell.coordinate} sunk the ship!"
     elsif cell.hit?
-      p "You hit a ship!"
-      puts "\n"
+      puts
+      p "#{cell.coordinate} hit a ship!"
     end
   end
-
-
 end
