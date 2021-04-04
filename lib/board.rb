@@ -1,9 +1,10 @@
 
 class Board
 
-  attr_reader :cells
-  def initialize
+  attr_reader :cells, :board_length
+  def initialize (board_length)
     @cells = cell_creator
+    @board_length = board_length
   end
 
   def cell_creator
@@ -111,7 +112,7 @@ class Board
 
   def shot_evaluate(cell)
     if cell.miss?
-      puts 
+      puts
       p "#{cell.coordinate} missed!"
     elsif cell.sunk?
       puts
