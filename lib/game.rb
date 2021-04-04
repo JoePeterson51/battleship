@@ -1,8 +1,8 @@
 class Game
   attr_reader :computer_board, :player_board, :game_over
   def initialize
-    @computer_board = Board.new
-    @player_board = Board.new
+    @computer_board = computer_board
+    @player_board = player_board
     @game_over = false
   end
 
@@ -15,7 +15,7 @@ class Game
 
   def welcome
     welcome_message
-    input = gets.chomp.upcase
+    input = gets.chomp.upcase!
     puts
     if input == "P"
       start
@@ -29,6 +29,8 @@ class Game
   end
 
   def start
+    @player_board = Board.new
+    @computer_board = Board.new
     computer_place
     user_place
     loop do
@@ -48,7 +50,6 @@ class Game
       end
     end
   end
-
 
   def cruiser_cell_generator
       @computer_board.cells.keys.combination(3).to_a.shuffle
@@ -208,9 +209,8 @@ class Game
     puts "COMPUTER ----'I shoot at #{shot}!'"
     player_board.fire(shot)
     puts "\n"
-    @computer_board.shot_evaluate
+    @computer_board
     show_player_board
     puts
-    # Add shot evaluation for computer shot. Add shot location for player shot
   end
 end
