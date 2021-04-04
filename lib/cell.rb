@@ -20,7 +20,9 @@ class Cell
     end
 
     def fire_upon
-        return "already fired here" if fired_upon?
+        if fired_upon?
+          puts "Already fired here"
+        end
         @fired_upon = true
         if empty? == false
             ship.hit
