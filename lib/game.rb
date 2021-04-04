@@ -188,10 +188,17 @@ class Game
   def player_shot
     prompt_shot
     shot = gets.chomp.upcase!
-        if computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon? == false
+    if computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon?
+      puts
+      puts "!!!Already fired here!!!"
+      puts "------------------------"
+      player_shot
+    elsif computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon? == false
       computer_board.fire(shot)
     else
-      puts "Invalid coordinate. Try again."
+      puts
+      puts "That's an invalid coordinate. What are you doing?"
+      puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
       player_shot
     end
     puts
