@@ -127,46 +127,55 @@ describe Board do
     end
   end
 
-  describe "#render" do
-    it 'renders a board' do
-      board = Board.new(4)
-      cruiser = Ship.new("Cruiser", 3)
-      board.place(cruiser, ["A1", "A2", "A3"])
-      board.render
-
-      expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-    end
-
-    it 'renders board with ship' do
-      board = Board.new(4)
-      cruiser = Ship.new("Cruiser", 3)
-      board.place(cruiser, ["A1", "A2", "A3"])
-
-      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
-    end
-
-    it 'can fire on board' do
-      board = Board.new(4)
-      cruiser = Ship.new("Cruiser", 3)
-      board.place(cruiser, ["A1", "A2", "A3"])
-      board.fire("B1")
-
-      expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n")
-    end
-
-    it 'can be sunk' do
-      board = Board.new(4)
-      cruiser = Ship.new("Cruiser", 3)
-      board.place(cruiser, ["A1", "A2", "A3"])
-      board.fire("A1")
-      board.fire("A2")
-
-      expect(board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
-
-      board.fire("A3")
-      expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
-    end
-  end
+#   describe "#render" do
+#     it 'renders a board' do
+#       board = Board.new(4)
+#       cruiser = Ship.new("Cruiser", 3)
+#       board.place(cruiser, ["A1", "A2", "A3"])
+#       board.render
+#       # binding.pry
+#       expect{board.render}.to output(
+# '1      2      3      4
+#
+# A   .      .      .      .
+#
+# B   .      .      .      .
+#
+# C   .      .      .      .
+#
+# D   .      .      .      .').to_stdout
+#     end
+#
+#     xit 'renders board with ship' do
+#       board = Board.new(4)
+#       cruiser = Ship.new("Cruiser", 3)
+#       board.place(cruiser, ["A1", "A2", "A3"])
+#
+#       expect(board.render(true)).to eq
+#     end
+#
+#     xit 'can fire on board' do
+#       board = Board.new(4)
+#       cruiser = Ship.new("Cruiser", 3)
+#       board.place(cruiser, ["A1", "A2", "A3"])
+#       board.fire("B1")
+#
+#       expect(board.render(true)).to eq
+#     end
+#
+#     xit 'can be sunk' do
+#       board = Board.new(4)
+#       cruiser = Ship.new("Cruiser", 3)
+#       board.place(cruiser, ["A1", "A2", "A3"])
+#       board.fire("A1")
+#       board.fire("A2")
+#
+#       expect(board.render).to eq
+#
+#       board.fire("A3")
+#       expect(board.render).to eq
+#     end
+#   end
 
 
 
