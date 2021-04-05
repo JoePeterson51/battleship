@@ -25,13 +25,12 @@ class Board
     cells
   end
 
-
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
   end
 
   def cells_split(cells_array)
-    cells_split = cells_array.map do |cell|
+    cells_array.map do |cell|
       cell.split('')
     end
   end
@@ -116,7 +115,6 @@ class Board
       cell_hash[letter] = [] 
     end 
 
-
     rendered_cells.map do |cell|
       cell_hash.map do |key, value|
         if cell.coordinate[0] == key 
@@ -134,24 +132,12 @@ class Board
     rendered_cells_hash = cell_hash.map do |letter, cells|
       puts "\n #{letter}   " + cells.join("      ")
     end 
-
-
-
-    # rendered.insert()
-    # rendered.insert(-@board_length, "\nD")
-    # rendered.insert(, "\nC")
-    # rendered.insert(4, "\nB")
-    # rendered.unshift("  1 2 3 4 \nA")
-    # rendered.join(" ")
   end
 
   def fire(cell)
     fired_cell = @cells[cell]
     fired_cell.fire_upon
     shot_evaluate(fired_cell)
-
-    # fired_cell.shot_evaluate
-
   end
 
   def shot_evaluate(cell)

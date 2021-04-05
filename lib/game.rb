@@ -176,16 +176,50 @@ class Game
     puts "================================"
   end
 
-  def game_over?
-    if @player_board.render(true).include?("S") == false
-      puts "Computer has won."
-      @game_over = true
-    elsif @computer_board.render(true).include?("S") == false
-      puts "You have won!!!"
-      @game_over = true
+  def player_ships
+    player_board.cells.select do |coordinate, cell|
+      cell.ship != nil 
+    end 
+  end 
+
+  def computer_ships
+    computer_board.cells.select do |coordinate, cell|
+      cell.ship != nil 
+    end 
+  end 
+
+  def player_alive?
+    player_ships.any? do |coordinate, cell|
+      cell.ship.sunk? == false
     end
-      @game_over
-  end
+  end 
+
+  def computer_alive?
+    computer_ships.any? do |coordinate, cell|
+      cell.ship.sunk? == false
+    end 
+  end 
+
+  def game_over_message 
+    if player_alive? == false 
+      puts "Computer won."
+    elsif computer_alive? == false 
+      puts "YOU WON!!!!!!"
+    end 
+  end 
+
+  def game_over?
+    if player_alive? == false
+      @game_over = true 
+      game_over_message
+    elsif computer_alive? == false 
+      @game_over = true 
+      game_over_message
+    else
+      @game_over = false 
+    end 
+    @game_over
+  end 
 
   def player_shot
     prompt_shot
