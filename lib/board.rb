@@ -93,21 +93,47 @@ class Board
   end
 
   def format_render(show_ships = nil)
-    total_cells = @board_length * @board_length
-    rendered = @cells.map do |location, cell |
+    letters = @potential_letters[0..(@board_length - 1)]
+    numbers = letters.map do |letter|
+      (letters.index(letter) + 1).to_s 
+    end 
+    coordinates = letters.map do |letter|
+      letter = numbers.map do |number|
+        letter + number 
+      end 
+    end.flatten
+    puts "     " + numbers.join("      ")
+
+    rendered_cells = cells.map do |coordinate, cell|
+      cell
+    end 
+
+    cell_hash = Hash.new do |hash, key|
+      hash[key] = []
+    end 
+
+    letters.each do |letter| 
+      cell_hash[letter] = [] 
+    end 
+
+
+    rendered_cells.map do |cell|
+      cell_hash.map do |key, value|
+        if cell.coordinate[0] == key 
+          cell_hash[key] << cell 
+        end 
+      end 
+    end 
+
+    cell_hash.map do |letter, cells|
+      cell_hash[letter] = cells.map do |cell|
         cell.render(show_ships)
-    end
-   letters = @potential_letters[0..(@board_length - 1)]
-      # require 'pry'; binding.pry
-    length = @board_length
-    rendered << "\n"
-    length.times do
-      rendered.insert(-@board_length, "\n#{letters.first}")
-      @board_length + @board_length
-      letters.shift
-    end
-    header_numbers = Array.new(@board_length,)
-    require "pry"; binding.pry
+      end 
+    end 
+
+    rendered_cells_hash = cell_hash.map do |letter, cells|
+      puts "\n #{letter}   " + cells.join("      ")
+    end 
 
 
 
@@ -116,7 +142,7 @@ class Board
     # rendered.insert(, "\nC")
     # rendered.insert(4, "\nB")
     # rendered.unshift("  1 2 3 4 \nA")
-    rendered.join(" ")
+    # rendered.join(" ")
   end
 
   def fire(cell)
