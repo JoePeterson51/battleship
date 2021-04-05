@@ -8,17 +8,32 @@ class Board
     @cells = cell_creator
   end
 
-  def cell_creator
-    letters = @potential_letters[0..(@board_length - 1)]
-    numbers = letters.map do |letter|
+  def letter_generator
+    @potential_letters[0..(@board_length - 1)]
+  end
+
+  def number_generator
+    letters = letter_generator
+    letters.map do |letter|
        (letters.index(letter) + 1).to_s
     end
-    cells = {}
-    coordinates = letters.map do |letter|
+  end
+
+  def coordinate_generator
+    letters = letter_generator
+    numbers = number_generator
+    letters.map do |letter|
     letter = numbers.map do |coordinate|
           letter + coordinate
       end
     end.flatten
+  end
+
+  def cell_creator
+    letters = letter_generator
+    numbers = number_generator
+    cells = {}
+    coordinates = coordinate_generator
     coordinates.map do |coordinate|
      cells[coordinate] = Cell.new(coordinate)
     end
@@ -92,46 +107,34 @@ class Board
   end
 
   def format_render(show_ships = nil)
-    letters = @potential_letters[0..(@board_length - 1)]
-    numbers = letters.map do |letter|
-      (letters.index(letter) + 1).to_s 
-    end 
-    coordinates = letters.map do |letter|
-      letter = numbers.map do |number|
-        letter + number 
-      end 
-    end.flatten
+    letters = letter_generator
+    numbers = number_generator
+    coordinates = coordinate_generator
     puts "     " + numbers.join("      ")
-
     rendered_cells = cells.map do |coordinate, cell|
       cell
-    end 
-
+    end
     cell_hash = Hash.new do |hash, key|
       hash[key] = []
-    end 
-
-    letters.each do |letter| 
-      cell_hash[letter] = [] 
-    end 
-
+    end
+    letters.each do |letter|
+      cell_hash[letter] = []
+    end
     rendered_cells.map do |cell|
       cell_hash.map do |key, value|
-        if cell.coordinate[0] == key 
-          cell_hash[key] << cell 
-        end 
-      end 
-    end 
-
+        if cell.coordinate[0] == key
+          cell_hash[key] << cell
+        end
+      end
+    end
     cell_hash.map do |letter, cells|
       cell_hash[letter] = cells.map do |cell|
         cell.render(show_ships)
-      end 
-    end 
-
-    rendered_cells_hash = cell_hash.map do |letter, cells|
+      end
+    end
+   rendered_cells_hash = cell_hash.map do |letter, cells|
       puts "\n #{letter}   " + cells.join("      ")
-    end 
+    end
   end
 
   def fire(cell)
