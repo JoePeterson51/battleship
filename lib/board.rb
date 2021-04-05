@@ -106,21 +106,29 @@ class Board
     format_render(show_ships)
   end
 
+  def empty_hash_creator
+    Hash.new do |hash, key|
+      hash[key] = []
+    end
+  end
+
+  def all_cells
+    @cells.map do |coordinate, cell|
+      cell
+    end
+  end
+
   def format_render(show_ships = nil)
     letters = letter_generator
     numbers = number_generator
     coordinates = coordinate_generator
     puts "     " + numbers.join("      ")
-    rendered_cells = cells.map do |coordinate, cell|
-      cell
-    end
-    cell_hash = Hash.new do |hash, key|
-      hash[key] = []
-    end
+    instantiated_cells = all_cells
+    cell_hash = empty_hash_creator
     letters.each do |letter|
       cell_hash[letter] = []
     end
-    rendered_cells.map do |cell|
+    instantiated_cells.map do |cell|
       cell_hash.map do |key, value|
         if cell.coordinate[0] == key
           cell_hash[key] << cell
