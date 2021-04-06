@@ -153,7 +153,38 @@ class Game
         puts "-------------------------------"
         puts
       end
+      create_ship
   end
+
+  def create_ship
+    puts "Now create your own ship!"
+    puts 
+    puts "Enter ship name"
+    name = gets.chomp.capitalize
+    puts "Enter ship length 2-5"
+    length = gets.chomp.to_i
+    ship = Ship.new("#{name}", length)
+    input_count = 1
+    input = []
+    length.times do 
+      puts "Enter coordinate ##{input_count}"
+      input << gets.chomp.upcase! 
+      input_count += 1
+    end 
+    if player_board.valid_placement?(ship, input) == false
+        puts "Those coordinates are not valid!"
+        puts
+        create_ship
+      else
+        player_board.place(ship, input)
+        puts player_board.render(true)
+        puts
+        puts "^^^ There it is! Your #{name}."
+        puts "-------------------------------"
+        puts
+      end
+    require 'pry'; binding.pry
+  end 
 
   def user_submarine_place
     submarine_greeting
