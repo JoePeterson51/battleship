@@ -1,8 +1,16 @@
 class Game
-  attr_reader :computer_board, :player_board, :game_over, :created_ship_name, :created_ship_length
+  attr_reader :computer_board,
+              :player_board,
+              :game_over,
+              :created_ship_name,
+              :created_ship_length,
+              :player,
+              :computer
   def initialize
     @computer_board = computer_board
     @player_board = player_board
+    @player = player
+    @computer = computer
     @created_ship_name = created_ship_name
     @created_ship_length = created_ship_length
     @game_over = false
@@ -35,7 +43,9 @@ class Game
     board_length = gets.chomp
     @player_board = Board.new(board_length)
     @computer_board = Board.new(board_length)
-    user_place
+    @player = Player.new(@player_board)
+    @computer = Computer.new(@computer_board)
+    player.user_place
     computer_place
     loop do
       player_shot
@@ -82,92 +92,92 @@ class Game
     @computer_board.place(submarine, valid_submarine)
     valid_created_ship = created_ship_cell_generator.find do |array|
       @computer_board.valid_placement?(created_ship, array)
-    end 
+    end
     @computer_board.place(created_ship, valid_created_ship)
   end
 
-  def cruiser_place_greeting
-    puts "I have placed my ships!"
-    puts "Now it's your turn, punk."
-    puts "This is YOUR BOARD!"
-    puts "-------------------------"
-  end
+  # def cruiser_place_greeting
+  #   puts "I have placed my ships!"
+  #   puts "Now it's your turn, punk."
+  #   puts "This is YOUR BOARD!"
+  #   puts "-------------------------"
+  # end
 
-  def cruiser_coordinate_prompt
-    puts "You have a cruiser. It cruises. Place it. It is 3 units long."
-    puts "Enter the squares for the Cruiser. They should be three in a row/column."
-    puts "NO DIAGONALS!"
-    puts
-    puts "Enter the first coordinate ->"
-  end
+  # def cruiser_coordinate_prompt
+  #   puts "You have a cruiser. It cruises. Place it. It is 3 units long."
+  #   puts "Enter the squares for the Cruiser. They should be three in a row/column."
+  #   puts "NO DIAGONALS!"
+  #   puts
+  #   puts "Enter the first coordinate ->"
+  # end
 
-  def cruiser_place
-    cruiser = Ship.new("Cruiser", 3)
-    first_coordinate = gets.chomp.upcase!
-    puts
-    puts "Now enter the second coordinate ->"
-    second_coordinate = gets.chomp.upcase!
-    puts
-    puts "Now enter the last coordinate! ->"
-    third_coordinate = gets.chomp.upcase!
-    puts "----------------------------------"
-    cruiser_input = [first_coordinate, second_coordinate, third_coordinate]
-      if player_board.valid_placement?(cruiser, cruiser_input) == false
-        puts "Those coordinates are not valid!"
-        puts
-        user_place
-      else
-        player_board.place(cruiser, cruiser_input)
-        puts player_board.render(true)
-        puts
-        puts "^^^ There it is! Your cruuuuuiser."
-        puts "----------------------------------"
-      end
-  end
+  # def cruiser_place
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   first_coordinate = gets.chomp.upcase!
+  #   puts
+  #   puts "Now enter the second coordinate ->"
+  #   second_coordinate = gets.chomp.upcase!
+  #   puts
+  #   puts "Now enter the last coordinate! ->"
+  #   third_coordinate = gets.chomp.upcase!
+  #   puts "----------------------------------"
+  #   cruiser_input = [first_coordinate, second_coordinate, third_coordinate]
+  #     if player_board.valid_placement?(cruiser, cruiser_input) == false
+  #       puts "Those coordinates are not valid!"
+  #       puts
+  #       user_place
+  #     else
+  #       player_board.place(cruiser, cruiser_input)
+  #       puts player_board.render(true)
+  #       puts
+  #       puts "^^^ There it is! Your cruuuuuiser."
+  #       puts "----------------------------------"
+  #     end
+  # end
 
-  def user_place
-    cruiser_place_greeting
-    puts player_board.render
-    puts
-    cruiser_coordinate_prompt
-    cruiser_place
-    user_submarine_place
-  end
+  # def user_place
+  #   cruiser_place_greeting
+  #   puts player_board.render
+  #   puts
+  #   cruiser_coordinate_prompt
+  #   cruiser_place
+  #   user_submarine_place
+  # end
+  #
+  # def submarine_greeting
+  #   puts
+  #   puts "Now place your submarine. Don't place it on your cruiser."
+  #   puts "It is 2 units long."
+  #   puts
+  #   puts "Enter your first_coordinate ->"
+  # end
+  #
+  # def submarine_place
+  #   submarine = Ship.new("Submarine", 2)
+  #   submarine_first_coordinate = gets.chomp.upcase!
+  #   puts
+  #   puts "And now the next coordinate. ->"
+  #   submarine_second_coordinate = gets.chomp.upcase!
+  #   puts "-------------------------------"
+  #   submarine_input = [submarine_first_coordinate, submarine_second_coordinate]
+  #     if player_board.valid_placement?(submarine, submarine_input) == false
+  #       puts "Those coordinates are not valid!"
+  #       puts
+  #       user_submarine_place
+  #     else
+  #       player_board.place(submarine, submarine_input)
+  #       puts player_board.render(true)
+  #       puts
+  #       puts "^^^ There it is! Your sub."
+  #       puts "-------------------------------"
+  #       puts
+  #     end
+  #     create_ship
+  #   end
 
-  def submarine_greeting
-    puts
-    puts "Now place your submarine. Don't place it on your cruiser."
-    puts "It is 2 units long."
-    puts
-    puts "Enter your first_coordinate ->"
-  end
-
-  def submarine_place
-    submarine = Ship.new("Submarine", 2)
-    submarine_first_coordinate = gets.chomp.upcase!
-    puts
-    puts "And now the next coordinate. ->"
-    submarine_second_coordinate = gets.chomp.upcase!
-    puts "-------------------------------"
-    submarine_input = [submarine_first_coordinate, submarine_second_coordinate]
-      if player_board.valid_placement?(submarine, submarine_input) == false
-        puts "Those coordinates are not valid!"
-        puts
-        user_submarine_place
-      else
-        player_board.place(submarine, submarine_input)
-        puts player_board.render(true)
-        puts
-        puts "^^^ There it is! Your sub."
-        puts "-------------------------------"
-        puts
-      end
-      create_ship
-    end
-    
     def create_ship
       puts "Now create your own ship!"
-      puts 
+      puts
       puts "Enter ship name"
       name = gets.chomp.capitalize
       puts "Enter ship length 2-5"
@@ -175,11 +185,11 @@ class Game
       ship = Ship.new(name, length)
       input_count = 1
       input = []
-      length.times do 
+      length.times do
         puts "Enter coordinate ##{input_count}"
-        input << gets.chomp.upcase! 
+        input << gets.chomp.upcase!
         input_count += 1
-      end 
+      end
       if player_board.valid_placement?(ship, input) == false
           puts "Those coordinates are not valid!"
           puts
@@ -193,8 +203,8 @@ class Game
           puts
         end
         @created_ship_name = name
-        @created_ship_length = length 
-    end 
+        @created_ship_length = length
+    end
 
   def user_submarine_place
     submarine_greeting
@@ -219,48 +229,48 @@ class Game
 
   def player_ships
     player_board.cells.select do |coordinate, cell|
-      cell.ship != nil 
-    end 
-  end 
+      cell.ship != nil
+    end
+  end
 
   def computer_ships
     computer_board.cells.select do |coordinate, cell|
-      cell.ship != nil 
-    end 
-  end 
+      cell.ship != nil
+    end
+  end
 
   def player_alive?
     player_ships.any? do |coordinate, cell|
       cell.ship.sunk? == false
     end
-  end 
+  end
 
   def computer_alive?
     computer_ships.any? do |coordinate, cell|
       cell.ship.sunk? == false
-    end 
-  end 
+    end
+  end
 
-  def game_over_message 
-    if player_alive? == false 
+  def game_over_message
+    if player_alive? == false
       puts "Computer won."
-    elsif computer_alive? == false 
+    elsif computer_alive? == false
       puts "YOU WON!!!!!!"
-    end 
-  end 
+    end
+  end
 
   def game_over?
     if player_alive? == false
-      @game_over = true 
+      @game_over = true
       game_over_message
-    elsif computer_alive? == false 
-      @game_over = true 
+    elsif computer_alive? == false
+      @game_over = true
       game_over_message
     else
-      @game_over = false 
-    end 
+      @game_over = false
+    end
     @game_over
-  end 
+  end
 
   def player_shot
     prompt_shot
