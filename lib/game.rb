@@ -68,10 +68,6 @@ class Game
       end
     end
   end
-
-  # def created_ship_cell_generator
-  #   @computer_board.cells.keys.combination(created_ship_length).to_a.shuffle
-  # end
   
   def create_ship
     puts "Now create your own ship!"
@@ -86,8 +82,9 @@ class Game
       create_ship
     end 
     ship = Ship.new(name, length)
+    ship_2 = Ship.new(name, length)
     player.add_ship(ship)
-    computer.add_ship(ship)
+    computer.add_ship(ship_2)
   end 
 
   def show_computer_board
@@ -126,7 +123,6 @@ class Game
     end
     @game_over
   end
-
 
   def game_over_message
     if player_dead?
