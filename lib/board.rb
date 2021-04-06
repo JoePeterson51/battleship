@@ -2,7 +2,7 @@
 class Board
 
   attr_reader :cells, :board_length, :potential_letters
-  def initialize (board_length)
+  def initialize(board_length)
     @board_length = board_length.to_i
     @potential_letters = ('A'..'Z').to_a
     @cells = cell_creator

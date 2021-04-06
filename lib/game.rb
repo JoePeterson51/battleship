@@ -65,51 +65,40 @@ class Game
     end
   end
 
-
   # def created_ship_cell_generator
   #   @computer_board.cells.keys.combination(created_ship_length).to_a.shuffle
   # end
-  #
-  #
-
-
-
-
-
-
-    # def create_ship
-    #   puts "Now create your own ship!"
-    #   puts
-    #   puts "Enter ship name"
-    #   name = gets.chomp.capitalize
-    #   puts "Enter ship length 2-5"
-    #   length = gets.chomp.to_i
-    #   ship = Ship.new(name, length)
-    #   input_count = 1
-    #   input = []
-    #   length.times do
-    #     puts "Enter coordinate ##{input_count}"
-    #     input << gets.chomp.upcase!
-    #     input_count += 1
-    #   end
-    #   if player_board.valid_placement?(ship, input) == false
-    #       puts "Those coordinates are not valid!"
-    #       puts
-    #       create_ship
-    #     else
-    #       player_board.place(ship, input)
-    #       puts player_board.render(true)
-    #       puts
-    #       puts "^^^ There it is! Your #{name}."
-    #       puts "-------------------------------"
-    #       puts
-    #     end
-    #     @created_ship_name = name
-    #     @created_ship_length = length
-    # end
-
-
   
+  # def create_ship
+  #   puts "Now create your own ship!"
+  #   puts
+  #   puts "Enter ship name"
+  #   name = gets.chomp.capitalize
+  #   puts "Enter ship length 2-5"
+  #   length = gets.chomp.to_i
+  #   ship = Ship.new(name, length)
+  #   input_count = 1
+  #   input = []
+  #   length.times do
+  #     puts "Enter coordinate ##{input_count}"
+  #     input << gets.chomp.upcase!
+  #     input_count += 1
+  #   end
+  #   if player_board.valid_placement?(ship, input) == false
+  #       puts "Those coordinates are not valid!"
+  #       puts
+  #       create_ship
+  #     else
+  #       player_board.place(ship, input)
+  #       puts player_board.render(true)
+  #       puts
+  #       puts "^^^ There it is! Your #{name}."
+  #       puts "-------------------------------"
+  #       puts
+  #     end
+  #     @created_ship_name = name
+  #     @created_ship_length = length
+  # end
 
   def show_computer_board
     puts "==========COMPUTER BOARD=========="
@@ -123,49 +112,38 @@ class Game
     puts "================================"
   end
 
-  def player_ships
-    player_board.cells.select do |coordinate, cell|
-      cell.ship != nil
-    end
-  end
+  def player_dead?
+    player.ships.all? do |ship|
+      ship.health == 0
+    end 
+  end 
 
-  def computer_ships
-    computer_board.cells.select do |coordinate, cell|
-      cell.ship != nil
-    end
-  end
-
-  def player_alive?
-    player_ships.any? do |coordinate, cell|
-      cell.ship.sunk? == false
-    end
-  end
-
-  def computer_alive?
-    computer_ships.any? do |coordinate, cell|
-      cell.ship.sunk? == false
-    end
-  end
-
-  def game_over_message
-    if player_alive? == false
-      puts "Computer won."
-    elsif computer_alive? == false
-      puts "YOU WON!!!!!!"
-    end
-  end
-
+  def computer_dead?
+    computer.ships.all? do |ship|
+      ship.health == 0
+    end 
+  end 
+  
   def game_over?
-    if player_alive? == false
+    if player_dead?
       @game_over = true
       game_over_message
-    elsif computer_alive? == false
+    elsif computer_dead?
       @game_over = true
       game_over_message
     else
       @game_over = false
     end
     @game_over
+  end
+
+
+  def game_over_message
+    if player_dead?
+      puts "Computer won."
+    elsif computer_dead?
+      puts "YOU WON!!!!!!"
+    end
   end
 
   def player_shot
