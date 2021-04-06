@@ -27,6 +27,10 @@ class Player
   def cruiser_place
     cruiser = Ship.new("Cruiser", 3)
     add_ship(cruiser)
+    cruiser_place_greeting
+    puts board.render
+    puts
+    cruiser_coordinate_prompt
     first_coordinate = gets.chomp.upcase!
     puts
     puts "Now enter the second coordinate ->"
@@ -50,14 +54,10 @@ class Player
   end
 
   def user_place
-    cruiser_place_greeting
-    puts board.render
-    puts
-    cruiser_coordinate_prompt
     cruiser_place
     user_submarine_place
+    place_created_ship
   end
-
 
   def user_submarine_place
     submarine_greeting
@@ -85,42 +85,44 @@ class Player
     submarine_second_coordinate = gets.chomp.upcase!
     puts "-------------------------------"
     submarine_input = [submarine_first_coordinate, submarine_second_coordinate]
-      if board.valid_placement?(submarine, submarine_input) == false
-        puts "Those coordinates are not valid!"
-        puts
-        user_submarine_place
-      else
-        board.place(submarine, submarine_input)
-        puts board.render(true)
-        puts
-        puts "^^^ There it is! Your sub."
-        puts "-------------------------------"
-        puts
-      end
-      # create_ship
+    if board.valid_placement?(submarine, submarine_input) == false
+      puts "Those coordinates are not valid!"
+      puts
+      user_submarine_place
+    else
+      board.place(submarine, submarine_input)
+      puts board.render(true)
+      puts
+      puts "^^^ There it is! Your sub."
+      puts "-------------------------------"
+      puts
     end
+  end
 
-    # def player_shot
-    #   prompt_shot
-    #   shot = gets.chomp.upcase!
-    #   if computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon?
-    #     puts
-    #     puts "!!!Already fired here!!!"
-    #     puts "------------------------"
-    #     player_shot
-    #   elsif computer_board.valid_coordinate?(shot) && computer_board.cells[shot].fired_upon? == false
-    #     computer_board.fire(shot)
-    #   else
-    #     puts
-    #     puts "That's an invalid coordinate. What are you doing?"
-    #     puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    #     player_shot
-    #   end
-    #   puts
-    #   show_computer_board
-    # end
-
-
-
-
-end
+  def place_created_ship
+    length = @ships.first.length 
+    name = @ships.first.name 
+    puts "This is your #{name}."
+    puts 
+    puts "It is #{length} units long."
+    input_count = 1
+    input = []
+    length.times do
+    puts "Enter coordinate ##{input_count}"
+    input << gets.chomp.upcase!
+    input_count += 1
+    end
+    if board.valid_placement?(@ships.first, input) == false
+      puts "Those coordinates are not valid!"
+      puts
+      place_created_ship
+    else
+      board.place(@ships.first, input)
+      puts board.render(true)
+      puts
+      puts "^^^ There it is! Your #{name}."
+      puts "-------------------------------"
+      puts
+    end
+  end
+end 

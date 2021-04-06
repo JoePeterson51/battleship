@@ -13,6 +13,10 @@ class Computer
     @board.cells.keys.combination(2).to_a.shuffle
   end
 
+  def add_ship(ship)
+    @ships << ship
+  end
+
   # def created_ship_cell_generator
   #   @board.cells.keys.combination(created_ship_length).to_a.shuffle
   # end
@@ -20,6 +24,8 @@ class Computer
   def computer_place
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+    add_ship(cruiser)
+    add_ship(submarine)
     # created_ship = Ship.new(created_ship_name, created_ship_length)
     @board.cell_creator
     valid_cruiser = cruiser_cell_generator.find do |array|
@@ -35,22 +41,4 @@ class Computer
     # end
     # @board.place(created_ship, valid_created_ship)
   end
-
-  # def computer_shot
-  #   possible_cells = player_board.cells.values
-  #   unfired = possible_cells.select do |cell|
-  #     cell.fired_upon? == false
-  #   end
-  #   unfired.shuffle!
-  #   shot = unfired.shift.coordinate
-  #   puts
-  #   puts "COMPUTER ----'I shoot at #{shot}!'"
-  #   player_board.fire(shot)
-  #   puts "\n"
-  #   @board
-  #   puts
-  # end
-
-
-
 end
