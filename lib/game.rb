@@ -5,7 +5,8 @@ class Game
               :created_ship_name,
               :created_ship_length,
               :player,
-              :computer
+              :computer,
+              :max_length
   def initialize
     @computer_board = computer_board
     @player_board = player_board
@@ -14,6 +15,7 @@ class Game
     @created_ship_name = created_ship_name
     @created_ship_length = created_ship_length
     @game_over = false
+    @max_length = 3
   end
 
   def welcome_message
@@ -41,10 +43,12 @@ class Game
   def start
     puts "How big should the board be? Enter a number between 1-26."
     board_length = gets.chomp
+    @max_length = board_length.to_i 
     @player_board = Board.new(board_length)
     @computer_board = Board.new(board_length)
     @player = Player.new(@player_board)
     @computer = Computer.new(@computer_board)
+    create_ship
     player.user_place
     computer.computer_place
     loop do
@@ -69,36 +73,22 @@ class Game
   #   @computer_board.cells.keys.combination(created_ship_length).to_a.shuffle
   # end
   
-  # def create_ship
-  #   puts "Now create your own ship!"
-  #   puts
-  #   puts "Enter ship name"
-  #   name = gets.chomp.capitalize
-  #   puts "Enter ship length 2-5"
-  #   length = gets.chomp.to_i
-  #   ship = Ship.new(name, length)
-  #   input_count = 1
-  #   input = []
-  #   length.times do
-  #     puts "Enter coordinate ##{input_count}"
-  #     input << gets.chomp.upcase!
-  #     input_count += 1
-  #   end
-  #   if player_board.valid_placement?(ship, input) == false
-  #       puts "Those coordinates are not valid!"
-  #       puts
-  #       create_ship
-  #     else
-  #       player_board.place(ship, input)
-  #       puts player_board.render(true)
-  #       puts
-  #       puts "^^^ There it is! Your #{name}."
-  #       puts "-------------------------------"
-  #       puts
-  #     end
-  #     @created_ship_name = name
-  #     @created_ship_length = length
-  # end
+  def create_ship
+    puts "Now create your own ship!"
+    puts
+    puts "Enter ship name"
+    name = gets.chomp.capitalize
+    puts "Enter ship length 2-5"
+    length = gets.chomp.to_i
+    if length > @max_length
+      puts "That ship is too large!!"
+      puts 
+      create_ship
+    end 
+    ship = Ship.new(name, length)
+    player.add_ship(ship)
+    computer.add_ship(ship)
+  end 
 
   def show_computer_board
     puts "==========COMPUTER BOARD=========="
