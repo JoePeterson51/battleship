@@ -46,16 +46,16 @@ class Game
     @player = Player.new(@player_board)
     @computer = Computer.new(@computer_board)
     player.user_place
-    computer_place
+    computer.computer_place
     loop do
-      player_shot
+      player.player_shot
       if game_over?
         puts "game over"
         puts "\n"
         welcome
       break
       end
-    computer_shot
+    computer.computer_shot
       if game_over?
         puts "game over"
         puts "\n"
@@ -65,36 +65,36 @@ class Game
     end
   end
 
-  def cruiser_cell_generator
-    @computer_board.cells.keys.combination(3).to_a.shuffle
-  end
-
-  def submarine_cell_generator
-    @computer_board.cells.keys.combination(2).to_a.shuffle
-  end
-
-  def created_ship_cell_generator
-    @computer_board.cells.keys.combination(created_ship_length).to_a.shuffle
-  end
-
-  def computer_place
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    created_ship = Ship.new(created_ship_name, created_ship_length)
-    computer_board.cell_creator
-    valid_cruiser = cruiser_cell_generator.find do |array|
-      @computer_board.valid_placement?(cruiser, array)
-    end
-    @computer_board.place(cruiser, valid_cruiser)
-    valid_submarine = submarine_cell_generator.find do |array|
-      @computer_board.valid_placement?(submarine, array)
-    end
-    @computer_board.place(submarine, valid_submarine)
-    valid_created_ship = created_ship_cell_generator.find do |array|
-      @computer_board.valid_placement?(created_ship, array)
-    end
-    @computer_board.place(created_ship, valid_created_ship)
-  end
+  # def cruiser_cell_generator
+  #   @computer_board.cells.keys.combination(3).to_a.shuffle
+  # end
+  #
+  # def submarine_cell_generator
+  #   @computer_board.cells.keys.combination(2).to_a.shuffle
+  # end
+  #
+  # def created_ship_cell_generator
+  #   @computer_board.cells.keys.combination(created_ship_length).to_a.shuffle
+  # end
+  #
+  # def computer_place
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   submarine = Ship.new("Submarine", 2)
+  #   created_ship = Ship.new(created_ship_name, created_ship_length)
+  #   computer_board.cell_creator
+  #   valid_cruiser = cruiser_cell_generator.find do |array|
+  #     @computer_board.valid_placement?(cruiser, array)
+  #   end
+  #   @computer_board.place(cruiser, valid_cruiser)
+  #   valid_submarine = submarine_cell_generator.find do |array|
+  #     @computer_board.valid_placement?(submarine, array)
+  #   end
+  #   @computer_board.place(submarine, valid_submarine)
+  #   valid_created_ship = created_ship_cell_generator.find do |array|
+  #     @computer_board.valid_placement?(created_ship, array)
+  #   end
+  #   @computer_board.place(created_ship, valid_created_ship)
+  # end
 
   # def cruiser_place_greeting
   #   puts "I have placed my ships!"
@@ -291,20 +291,20 @@ class Game
     puts
     show_computer_board
   end
-
-  def computer_shot
-    possible_cells = player_board.cells.values
-    unfired = possible_cells.select do |cell|
-      cell.fired_upon? == false
-    end
-    unfired.shuffle!
-    shot = unfired.shift.coordinate
-    puts
-    puts "COMPUTER ----'I shoot at #{shot}!'"
-    player_board.fire(shot)
-    puts "\n"
-    @computer_board
-    show_player_board
-    puts
-  end
+  #
+  # def computer_shot
+  #   possible_cells = player_board.cells.values
+  #   unfired = possible_cells.select do |cell|
+  #     cell.fired_upon? == false
+  #   end
+  #   unfired.shuffle!
+  #   shot = unfired.shift.coordinate
+  #   puts
+  #   puts "COMPUTER ----'I shoot at #{shot}!'"
+  #   player_board.fire(shot)
+  #   puts "\n"
+  #   @computer_board
+  #   show_player_board
+  #   puts
+  # end
 end
