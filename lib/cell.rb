@@ -21,7 +21,7 @@ class Cell
 
     def fire_upon
         if fired_upon?
-          puts "Already fired here"
+          return "Already fired here"
         end
         @fired_upon = true
         if empty? == false
