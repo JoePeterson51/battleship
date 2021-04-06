@@ -36,13 +36,13 @@ class Player
     third_coordinate = gets.chomp.upcase!
     puts "----------------------------------"
     cruiser_input = [first_coordinate, second_coordinate, third_coordinate]
-      if player_board.valid_placement?(cruiser, cruiser_input) == false
+      if board.valid_placement?(cruiser, cruiser_input) == false
         puts "Those coordinates are not valid!"
         puts
         user_place
       else
-        player_board.place(cruiser, cruiser_input)
-        puts player_board.render(true)
+        board.place(cruiser, cruiser_input)
+        puts board.render(true)
         puts
         puts "^^^ There it is! Your cruuuuuiser."
         puts "----------------------------------"
@@ -51,7 +51,7 @@ class Player
 
   def user_place
     cruiser_place_greeting
-    puts player_board.render
+    puts board.render
     puts
     cruiser_coordinate_prompt
     cruiser_place
@@ -68,25 +68,26 @@ class Player
 
   def submarine_place
     submarine = Ship.new("Submarine", 2)
+    add_ship(submarine)
     submarine_first_coordinate = gets.chomp.upcase!
     puts
     puts "And now the next coordinate. ->"
     submarine_second_coordinate = gets.chomp.upcase!
     puts "-------------------------------"
     submarine_input = [submarine_first_coordinate, submarine_second_coordinate]
-      if player_board.valid_placement?(submarine, submarine_input) == false
+      if board.valid_placement?(submarine, submarine_input) == false
         puts "Those coordinates are not valid!"
         puts
         user_submarine_place
       else
-        player_board.place(submarine, submarine_input)
-        puts player_board.render(true)
+        board.place(submarine, submarine_input)
+        puts board.render(true)
         puts
         puts "^^^ There it is! Your sub."
         puts "-------------------------------"
         puts
       end
-      create_ship
+      # create_ship
     end
 
 
