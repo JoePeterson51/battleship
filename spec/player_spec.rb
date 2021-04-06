@@ -17,7 +17,30 @@ describe Player do
     board = Board.new(4)
     player = Player.new(board)
 
-    
+
     expect(player.board).to be_a(Board)
   end
+
+  it "has no ships to start" do
+    board = Board.new(4)
+    player = Player.new(board)
+
+    expect(player.ships).to eq([])
+  end
+
+
+
+  # describe "#cruiser_place" do
+  #   it 'can place a cruiser' do
+  #     board = Board.new(4)
+  #     player = Player.new(board)
+  #     player.cruiser_place
+  #
+  #     expect(player.ships).to eq([cruiser])
+  #
+  #
+  #   end
+
+  end
+
 end
