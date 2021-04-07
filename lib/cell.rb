@@ -39,7 +39,7 @@ class Cell
       elsif blank?
         "🌊"
       elsif miss?
-        "🤦‍♂️"
+        "⭕️"
       elsif sunk?
         "🏊‍♀️"
       elsif hit?

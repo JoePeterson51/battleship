@@ -84,14 +84,14 @@ describe Cell do
         it 'renders empty space' do
             cell_1 = Cell.new("B4")
 
-            expect(cell_1.render).to eq(".")
+            expect(cell_1.render).to eq("🌊")
         end
 
         it 'render a miss space' do
             cell_1 = Cell.new("B4")
             cell_1.fire_upon
 
-            expect(cell_1.render).to eq("M")
+            expect(cell_1.render).to eq("⭕️")
         end
 
         it 'renders sunk space' do
@@ -100,7 +100,7 @@ describe Cell do
             cell_1.place_ship(cruiser)
             cell_1.fire_upon
 
-            expect(cell_1.render).to eq("X")
+            expect(cell_1.render).to eq("🏊‍♀️")
         end
 
         it 'renders hit space' do
@@ -109,7 +109,7 @@ describe Cell do
             cell_1.place_ship(cruiser)
             cell_1.fire_upon
 
-            expect(cell_1.render).to eq("H")
+            expect(cell_1.render).to eq("🔥")
         end
 
         it 'renders show ship space' do
@@ -118,7 +118,7 @@ describe Cell do
             cell_1.place_ship(cruiser)
 
 
-            expect(cell_1.render(true)).to eq("S")
+            expect(cell_1.render(true)).to eq(" 🛳")
         end
     end
 
@@ -132,16 +132,16 @@ describe Cell do
             cell_2.place_ship(cruiser)
             cell_3.fire_upon
 
-            expect(cell_3.render).to eq("M")
-            expect(cell_2.render(true)).to eq("S")
-            expect(cell_1.render).to eq(".")
+            expect(cell_3.render).to eq("⭕️")
+            expect(cell_2.render(true)).to eq(" 🛳")
+            expect(cell_1.render).to eq("🌊")
 
             cell_1.fire_upon
-            expect(cell_1.render).to eq("H")
+            expect(cell_1.render).to eq("🔥")
 
             cell_2.fire_upon
-            expect(cell_1.render).to eq("X")
-            expect(cell_2.render).to eq("X")
+            expect(cell_1.render).to eq("🏊‍♀️")
+            expect(cell_2.render).to eq("🏊‍♀️")
         end
     end
 
