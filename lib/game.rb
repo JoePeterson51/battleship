@@ -19,7 +19,7 @@ class Game
   end
 
   def welcome_message
-    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts "Welcome to BATTLESHIP!!!!"
     puts "Enter (P) to play. Enter (Q) to quit."
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -43,7 +43,7 @@ class Game
   def start
     puts "How big should the board be? Enter a number between 1-26."
     board_length = gets.chomp
-    @max_length = board_length.to_i 
+    @max_length = board_length.to_i
     @player_board = Board.new(board_length)
     @computer_board = Board.new(board_length)
     @player = Player.new(@player_board)
