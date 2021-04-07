@@ -122,7 +122,7 @@ class Board
     letters = letter_generator
     numbers = number_generator
     coordinates = coordinate_generator
-    puts "     " + numbers.join("         ")
+    puts "     " + numbers.join("           ")
     instantiated_cells = all_cells
     cell_hash = empty_hash_creator
     letters.each do |letter|
