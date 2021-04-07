@@ -35,7 +35,7 @@ class Cell
       elsif show_ships == true && (empty? == false && hit?)
         "🔥"
       elsif show_ships == true && (empty? == false && sunk? == false)
-        " 🛳"
+        "🛳 "
       elsif blank?
         "🌊"
       elsif miss?
