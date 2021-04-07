@@ -31,17 +31,17 @@ class Cell
 
     def render(show_ships = nil)
       if show_ships == true && (empty? == false && sunk?)
-        "🌊"
+        "🏊‍♀️"
       elsif show_ships == true && (empty? == false && hit?)
-        "🌊"
+        "🔥"
       elsif show_ships == true && (empty? == false && sunk? == false)
-        "🛳"
+        " 🛳"
       elsif blank?
-        "."
-      elsif miss?
-        "M"
-      elsif sunk?
         "🌊"
+      elsif miss?
+        "🤦‍♂️"
+      elsif sunk?
+        "🏊‍♀️"
       elsif hit?
         "🔥"
       end
